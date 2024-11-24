@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NBA</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>NBA Data Statistics</h1>
+    </header>
+    <div class="tabs">
+        <button class="tab-button" onclick="setActiveTab(this, 'teams')">Teams</button>
+        <button class="tab-button" onclick="setActiveTab(this, 'players')">Players</button>
+        <button class="tab-button" onclick="setActiveTab(this, 'games')">Games</button>
+    </div>
+
+    <div id="content" class="content">
+        <p>Select a tab to view data.</p>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

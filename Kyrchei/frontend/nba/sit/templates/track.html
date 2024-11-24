@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Players</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'players.css' %}">
+    <link rel="stylesheet" href="{% static 'teams.css' %}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/Flip.min.js"></script>
+</head>
+<body>
+   {% include 'header.html' %}
+    <h1 class="team-title">Teams</h1>
+    <div id="player-container" class="player-container">
+        {% for team in teams %}
+            <div class="player-tile" data-id="{{ team.id }}">
+                <h2 class="title">{{ team.full_name }}</h2>
+                <div class="info">
+                    <div class="info-item">
+                        <span class="otitle">City</span>
+                        <span class="text">{{team.city}}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="otitle">Division</span>
+                        <span class="text">{{team.division}}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="otitle">Conference</span>
+                        <span class="text">{{team.conference}}</span>
+                    </div>
+                </div>
+                <form class="team-delete-form" action="/dteams" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="team_id" value="{{ team.id }}">
+                    <button id="form-button" class="delete-button">Untrack</button>
+                    <p id="my-form-status"></p>
+                </form>
+            </div>
+        {% endfor %}
+    </div>
+   <h1 class="player-title">Players</h1>
+    <div id="team-container" class="team-container">
+        {% for player in players %}
+            <div class="team-tile" data-id="{{ player.id }}">
+                <h2 class="title">{{ player.first_name }} {{ player.last_name }}</h2>
+                <div class="info">
+                    <div class="info-item">
+                        <span class="otitle">Position</span>
+                        <span class="text">{{player.position}}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="otitle">Jersey</span>
+                        <span class="text">{{player.jersey_number}}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="otitle">Team</span>
+                        <span class="text">{{player.team_city}}</span>
+                    </div>
+                </div>
+               <form class="player-delete-form" action="/dplayers" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="player_id" value="{{player.id }}">
+                    <button id="form-button-player" class="delete-button">Untrack</button>
+                    <p id="my-form-status-player"></p>
+                </form>
+            </div>
+        {% endfor %}
+    </div>
+    {% load static %}
+   <script src="{% static 'js/popup.js' %}"></script>
+    <div class="popup" id="popup">
+        <p id="popup-message"></p>
+    </div>
+</body>
+</html>

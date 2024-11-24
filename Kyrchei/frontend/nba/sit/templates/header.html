@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <title>NBA Data Statistics</title>
+
+    <style>
+        .header {
+            background-color: #202020;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 10px 0;
+            text-align: center;
+            z-index: 1000;
+            opacity: 0.8;
+            margin-bottom: 50px;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .header-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 1px solid #ccc;
+        }
+
+        .header-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0;
+            color: white;
+        }
+
+        .header-subtitle {
+            font-size: 14px;
+            font-style: italic;
+            color: #777;
+            margin: 0;
+        }
+
+        .check-button {
+            position: absolute;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        .check-icon {
+            width: 30px;
+            height: 30px;
+        }
+
+        .check-button.active {
+            background-color: #606060;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <img src="{% static 'nba-logo.jpg' %}" alt="NBA Logo" class="header-icon">
+            <div class="header-text">
+                <h1 class="header-title">NBA — News</h1>
+                <p class="header-subtitle">National Basketball Association</p>
+            </div>
+
+            <div class="tabs">
+                <button class="tab-button {% if active_tab == 'teams' %}active{% endif %}"
+                        onclick="location.href='{% url 'teams' %}'">Teams</button>
+                <button class="tab-button {% if active_tab == 'players' %}active{% endif %}"
+                        onclick="location.href='{% url 'players' %}'">Players</button>
+                <button class="tab-button {% if active_tab == 'games' %}active{% endif %}"
+                        onclick="location.href='{% url 'games' %}'">Games</button>
+            </div>
+
+            <button class="check-button"
+                    onclick="location.href='{% url 'track' %}'">
+                <img src="{% static 'check.png' %}" alt="Check Button" class="check-icon">
+            </button>
+        </div>
+    </header>
+</body>
+
+</html>
+
+
