@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Players</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'players.css' %}" >
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/Flip.min.js"></script>
+</head>
+<body>
+   {% include 'header.html' %}
+    <h1>Players</h1>
+    <div id="player-container" class="player-container">
+        {% for game in games %}
+            <div class="player-tile">
+                <h2 class="title"> {{ game.home_team.full_name }} vs {{game.visitor_team.full_name}}</h2>
+                <div class="info">
+                    <div class="info-item">
+                        <span class="otitle">Status</span>
+                        <span class="text">{{game.status}}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="otitle">Date</span>
+                        <span class="text">{{game.date}}</span>
+                    </div>
+                </div>
+                <button class="save-button">Track</button>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

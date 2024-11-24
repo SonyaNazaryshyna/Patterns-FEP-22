@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Players</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'players.css' %}" >
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/Flip.min.js"></script>
+</head>
+<body>
+   {% include 'header.html' %}
+   <div class="carousel">
+        <div class="carousel-track">
+            <img src="{% static 'nblogo.png' %}" alt="Slide 1" class="carousel-item">
+            <img src="{% static 'i.jpeg' %}" alt="Slide 2" class="carousel-item">
+<!--            <img src="https://via.placeholder.com/800x400?text=Slide+3" alt="Slide 3" class="carousel-item">-->
+        </div>
+        <div class="carousel-controls">
+            <button class="control prev">❮</button>
+            <button class="control next">❯</button>
+        </div>
+    </div>
+    <h1>Players</h1>
+    <div id="player-container" class="player-container">
+        {% for team in teams %}
+            <div class="player-tile">
+                <h2 class="title">{{ team.full_name }}</h2>
+                <div class="info">
+                    <div class="info-item">
+                        <span class="otitle">City</span>
+                        <span class="text">{{team.city}}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="otitle">Division</span>
+                        <span class="text">{{team.division}}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="otitle">Conference</span>
+                        <span class="text">{{team.conference}}</span>
+                    </div>
+                </div>
+                <form class="team-form" action="/save" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="team_id" value="{{ team.id }}">
+                    <input type="hidden" name="team_name" value="{{ team.full_name }}">
+                    <input type="hidden" name="team_city" value="{{ team.city }}">
+                    <input type="hidden" name="team_division" value="{{ team.division }}">
+                    <input type="hidden" name="team_conference" value="{{ team.conference }}">
+                    <button id="form-button" class="save-button">Track</button>
+                    <p id="my-form-status"></p>
+                </form>
+            </div>
+        {% endfor %}
+        {% load static %}
+        <script src="{% static 'js/popup.js' %}"></script>
+        <script src="{% static 'js/carousel.js' %}"></script>
+    </div>
+    <div class="popup" id="popup">
+        <p id="popup-message">Success</p>
+    </div>
+</body>
+</html>
+

@@ -1,0 +1,16 @@
+
+services:
+  mongodb:
+    image: mariadb
+    restart: always
+    environment:
+      MARIADB_USER: admin
+      MARIADB_PASSWORD: 1111
+      MARIADB_ROOT_PASSWORD: 1111
+    ports:
+      - "33006:3306"
+    volumes:
+      - data:/data/sports
+
+volumes:
+  data:
